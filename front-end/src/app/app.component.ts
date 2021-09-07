@@ -95,5 +95,20 @@ export class AppComponent implements OnInit{
     )
   }
 
+  public searchStudent(key: string): void {
+    console.log(key);
+    const results: Student[] = [];
+    for (const student of this.students) {
+      if(student.name.toLowerCase().indexOf(key.toLowerCase()) !== -1){
+        results.push(student);
+      }
+    }
+
+    this.students = results;
+    if(results.length === 0 || !key){
+      this.getStudents();
+    }
+
+  }
 
 }
