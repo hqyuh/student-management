@@ -13,6 +13,7 @@ export class AppComponent implements OnInit{
 
   public students!: Student[];
   public editStudent!: Student;
+  public deleteStudent!: Student;
 
   constructor(private studentService: StudentService) {
 
@@ -47,6 +48,7 @@ export class AppComponent implements OnInit{
       button.setAttribute('data-target', '#updateEmployeeModal');
     }
     if (mode === 'delete') {
+      this.deleteStudent = student;
       button.setAttribute('data-target', '#deleteEmployeeModal');
     }
     // @ts-ignore
@@ -81,7 +83,17 @@ export class AppComponent implements OnInit{
     )
   }
 
-
+  public onDeleteStudent(studentId: number): void {
+    this.studentService.deleteStudent(studentId).subscribe(
+      (response: void) => {
+        console.log(response);
+        this.getStudents();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    )
+  }
 
 
 }

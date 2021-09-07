@@ -143,10 +143,10 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>Are you sure you want to delete student?</p>
+        <p>Are you sure you want to delete student {{deleteStudent?.name}}???</p>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-          <button class="btn btn-danger" data-dismiss="modal">Yes</button>
+          <button (click)="onDeleteStudent(deleteStudent.id)" class="btn btn-danger" data-dismiss="modal">Yes</button>
         </div>
       </div>
     </div>
