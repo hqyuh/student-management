@@ -12,6 +12,7 @@ import {NgForm} from "@angular/forms";
 export class AppComponent implements OnInit{
 
   public students!: Student[];
+  public editStudent!: Student;
 
   constructor(private studentService: StudentService) {
 
@@ -42,6 +43,7 @@ export class AppComponent implements OnInit{
       button.setAttribute('data-target', '#addEmployeeModal');
     }
     if (mode === 'edit') {
+      this.editStudent = student;
       button.setAttribute('data-target', '#updateEmployeeModal');
     }
     if (mode === 'delete') {
@@ -66,4 +68,20 @@ export class AppComponent implements OnInit{
       }
     )
   }
+
+  public onUpdateStudent(student: Student): void {
+    this.studentService.updateStudent(student).subscribe(
+      (response: Student) => {
+        console.log(response);
+        this.getStudents();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    )
+  }
+
+
+
+
 }
