@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Student} from "./common/student";
 import {StudentService} from "./service/student.service";
 import {HttpErrorResponse} from "@angular/common/http";
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-root',
@@ -51,4 +52,18 @@ export class AppComponent implements OnInit{
     button.click();
   }
 
+  public onAddStudent(addForm: NgForm): void {
+    // @ts-ignore
+    document.getElementById('add-student-form').click();
+
+    this.studentService.addStudent(addForm.value).subscribe(
+      (response: Student) => {
+        console.log(response);
+        this.getStudents();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    )
+  }
 }
